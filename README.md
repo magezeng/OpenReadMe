@@ -417,123 +417,18 @@ Response:
     "code": 20000,
     "data": [
         {
-            "CreatedAt": "2020-07-02T16:09:09+08:00",
-            "UpdatedAt": "2020-07-02T16:11:39+08:00",
+            "CreatedAt": "2020-07-02T16:09:19+08:00",
+            "UpdatedAt": "2020-07-02T16:09:19+08:00",
             "DeletedAt": null,
-            "ID": 1,
-            "name": "测试客户端",
-            "public_host": "66.66.66.66",
+            "ID": 2,
+            "name": "测试客户端2",
+            "public_host": "434.343.222",
             "private_host": "127.0.0.1",
-            "port": "8090"
-        }
-    ],
-    "msg": "查询成功"
-}
-```
-
-## 策略心跳API
-###1.更新或添加策略心跳
-Parameters:
-
-| Name | Type | Example | Description  |
-| ---- | ---- | -------- | ------------ |
-| strategy_id | STRING | 1 | 策略实例id |
-| status | STRING | 1 | 策略实例状态 |
-```
-POST /strategy-heart-beat
-```
-Response:
-```json
-{
-	"code": 20000,
-	"msg": "查询成功",
-	"data": {}
-}
-```
-###2.删除策略心跳
-```
-DELETE /strategy-heart-beat/{strategy_id}
-```
-Response:
-```json
-{
-	"code": 20000,
-	"msg": "删除成功",
-	"data": {}
-}
-```
-###3.获取所有策略心跳
-```
-GET /strategy-heart-beats
-```
-Response:
-```json
-{
-    "code": 20000,
-    "data": [
-        {
-            "CreatedAt": "2020-07-02T16:38:50+08:00",
-            "UpdatedAt": "2020-07-02T16:38:50+08:00",
-            "DeletedAt": null,
-            "ID": 1,
-            "strategy_id": 6,
-            "status": 1
-        }
-    ],
-    "msg": "查询成功"
-}
-```
-## 客户端心跳API
-###1.更新或添加客户端心跳
-Parameters:
-
-| Name | Type | Example | Description  |
-| ---- | ---- | -------- | ------------ |
-| client_id | STRING | 1 | 策略实例id |
-| cpu_usage | STRING | 1 | cpu使用率 |
-| mem_usage | STRING | 1 | 内存使用率 |
-| disk_usage | STRING | 1 | 硬盘使用率 |
-```
-POST /client-heart-beat
-```
-Response:
-```json
-{
-	"code": 20000,
-	"msg": "查询成功",
-	"data": {}
-}
-```
-###2.删除客户端心跳
-```
-DELETE /client-heart-beat/{client_id}
-```
-Response:
-```json
-{
-	"code": 20000,
-	"msg": "删除成功",
-	"data": {}
-}
-```
-###3.获取所有客户端心跳
-```
-GET /client-heart-beats
-```
-Response:
-```json
-{
-    "code": 20000,
-    "data": [
-        {
-            "CreatedAt": "2020-07-02T16:33:24+08:00",
-            "UpdatedAt": "2020-07-02T16:33:24+08:00",
-            "DeletedAt": null,
-            "ID": 1,
-            "client_id": 1,
-            "cpu_usage": 0.2,
-            "mem_usage": 0.2,
-            "disk_usage": 0.3
+            "port": "8090",
+            "strategy_group_number": 0,
+            "cpu_usage": 0,
+            "mem_usage": 0,
+            "disk_usage": 0
         }
     ],
     "msg": "查询成功"
@@ -560,3 +455,228 @@ Response:
     "msg": "策略操作成功"
 }
 ```
+
+## 用户API
+###1. 更新或添加用户
+Parameters:
+
+| Name | Type | Example | Description  |
+| ---- | ---- | -------- | ------------ |
+| id | STRING | 1 | 用户id(如果为空则新建) |
+| name | STRING | test | 用户名 |
+| email | STRING | 2222@qq.com | 邮箱 |
+| phone | STRING | 110 | 手机 |
+| password | STRING | dfsdfsdgfs | 密码 |
+```
+POST /user
+```
+Response:
+```json
+{
+    "code": 20000,
+    "data": {
+        "id": 2,
+        "name": "liangjiefei2",
+        "email": "22222",
+        "phone": "edeeeeeee",
+        "password": "123456",
+        "token": null
+    },
+    "msg": "存储成功"
+}
+```
+###2. 删除用户
+```
+DELETE /user/{user_id}
+```
+Response:
+```json
+{
+    "code": 20000,
+    "data": "{id:2}",
+    "msg": "删除成功"
+}
+```
+###3. 获取所有用户    
+```
+GET /users
+```
+Response:
+```json
+{
+    "code": 20000,
+    "data": [
+        {
+            "id": 1,
+            "name": "liangjiefei",
+            "email": "22222",
+            "phone": "r23235325",
+            "password": "*****",
+            "token": null,
+            "CreatedAt": "2020-08-18T15:02:35+08:00",
+            "UpdatedAt": "2020-08-18T15:03:15+08:00",
+            "DeletedAt": null
+        }
+    ],
+    "msg": "查询成功"
+}
+```
+## 登陆API
+###1. 登陆(返回的token需要带在headers内,其他所有的接口都需要验证token,目前还没做)
+Parameters:
+
+| Name | Type | Example | Description  |
+| ---- | ---- | -------- | ------------ |
+| name | STRING | liangjiefei | 用户名 |
+| password | STRING | 123456 | 密码 |
+```
+POST /login
+```
+Response:
+```json
+{
+    "code": 20000,
+    "data": {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImxpYW5namllZmVpIiwiZXhwIjoxNTk3NzY0NDQ0fQ.-4C_0eM-BLdKhnmNbuua7VFoBNyvcNc4KGt73K8uBL4"
+    },
+    "msg": "登陆成功"
+}
+```
+## 权限API
+###1.更新或添加权限
+Parameters:
+
+| Name | Type | Example | Description  |
+| ---- | ---- | -------- | ------------ |
+| id | STRING | 1 | 为空则为创建 |
+| name | STRING | 创建用户权限 | 权限名称 |
+| path | STRING | /user | 请求路径 |
+| method | STRING | POST | 请求方法 |
+```
+POST /power
+```
+Response:
+```json
+{
+    "code": 20000,
+    "data": {
+        "id": 2,
+        "name": "删除用户权限",
+        "path": "/user/:id",
+        "method": "DELETE"
+    },
+    "msg": "存储成功"
+}
+```
+###2.删除权限
+```
+DELETE /power/{power_id}
+```
+Response:
+```json
+{
+    "code": 20000,
+    "data": "{id:2}",
+    "msg": "删除成功"
+}
+```
+###3.获取所有权限
+```
+GET /powers
+```
+Response:
+```json
+{
+    "code": 20000,
+    "data": [
+        {
+            "id": 1,
+            "name": "创建用户权限",
+            "path": "/user",
+            "method": "POST",
+            "CreatedAt": "2020-08-18T15:38:48+08:00",
+            "UpdatedAt": "2020-08-18T15:38:48+08:00",
+            "DeletedAt": null
+        }
+    ],
+    "msg": "查询成功"
+}
+```
+## 用户权限API
+###1.增加用户权限
+Parameters:
+
+| Name | Type | Example | Description  |
+| ---- | ---- | -------- | ------------ |
+| user_id | STRING | 1 | 用户id |
+| power_id | STRING | /1 | 权限id |
+```
+POST /user-power
+```
+Response:
+```json
+{
+    "code": 20000,
+    "data": {
+        "id": 1,
+        "user_id": 1,
+        "power_id": 1
+    },
+    "msg": "存储成功"
+}
+```
+###2.删除用户权限
+```
+DELETE /user-power/{user_power_id}
+```
+Response:
+```json
+{
+    "code": 20000,
+    "data": "{id:2}",
+    "msg": "删除成功"
+}
+```
+###3.获取所有用户权限
+```
+GET /user-powers
+```
+Response:
+```json
+{
+    "code": 20000,
+    "data": [
+        {
+            "id": 1,
+            "user_id": 1,
+            "power_id": 1,
+            "CreatedAt": "2020-08-18T15:52:34+08:00",
+            "UpdatedAt": "2020-08-18T15:52:34+08:00",
+            "DeletedAt": null
+        }
+    ],
+    "msg": "查询成功"
+}
+```
+###4.获取某个用户权限
+```
+GET /user-powers/{user_id}
+```
+Response:
+```json
+{
+    "code": 20000,
+    "data": [
+        {
+            "id": 1,
+            "user_id": 1,
+            "power_id": 1,
+            "CreatedAt": "2020-08-18T15:52:34+08:00",
+            "UpdatedAt": "2020-08-18T15:52:34+08:00",
+            "DeletedAt": null
+        }
+    ],
+    "msg": "查询成功"
+}
+```
+
