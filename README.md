@@ -263,8 +263,10 @@ Parameters:
 | Name | Type | Example | Description  |
 | ---- | ---- | -------- | ------------ |
 | name | STRING | 测试策略 | 名称 |
+| group_id | STRING | 1 | 策略组id |
 | class_id | STRING | 1 | 策略类id |
 | client_id | STRING | 1 | 客户端id |
+| status | STRING | 0 | 状态 |
 | params | STRING | {...} | 参数 |
 ```
 POST /strategy-object
